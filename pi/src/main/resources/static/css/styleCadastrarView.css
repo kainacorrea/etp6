@@ -1,0 +1,61 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    background-color: #f5f5f5;
+    /*background-color: #1D1E33;*/
+}
+
+header {
+    background-color: #2D0347;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+form {
+    width: 500px;
+    margin: 20px;
+
+    align-items: center;
+    justify-content: center;
+}
+
+button {
+    background-color: #2D0347;
+    color: white;
+    padding: 7px;
+    margin: 8px;
+    border-radius: 30px;
+    border-style: hidden;
+    width: 180px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btnCadastrar:hover {
+    background-color: #58008f;
+}
+
+#btnCadastrar{
+    float: right;
+}
+
+#btnVoltar:hover {
+    border-color: #d10101;
+    color: #d10101;
+}
+
+#btnVoltar{
+    background-color: transparent;
+    border-style:solid;
+    border-color: #9c0000;
+    color: #9c0000;
+    width: 100px;
+}
