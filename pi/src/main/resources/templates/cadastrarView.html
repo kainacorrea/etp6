@@ -1,64 +1,173 @@
 <!DOCTYPE html>
 <html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
-<head>
-    <title>Cadastro de Funcionário</title>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" th:href="@{/css/styleCadastrarView.css}">
-</head>
+    <head>
+        <title>Cadastro de Funcionário</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+              integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <link rel="stylesheet" th:href="@{/css/styleCadastrarView.css}">
+    </head>
 
-<body>
-    <header>
-        <h2 th:if="${funcionario.id==null}">Cadastrar Funcionário</h2>
-        <h2 th:if="${funcionario.id>0}">Alterar Funcionário</h2>
-    </header>
+    <body>
+        <header>
+            <h2 th:if="${funcionario.id==null}">Cadastrar Funcionário</h2>
+            <h2 th:if="${funcionario.id>0}">Alterar Funcionário</h2>
+        </header>
 
-    <div class="container">
-        <div class="row justify-content-center align-items-center vh-100">
-            <div class="col-md-6">
-                <form class="form" th:action="@{${(funcionario.id == null) ? '/cadastrar' : '/atualizarFuncionario'}}" th:object="${funcionario}" method="POST">
-                    <input th:if="${funcionario.id>0}" type="hidden" th:field="*{id}"/>
-                    
-                    <p>
-                        <label for="txtNome">Nome</label>
-                        <input type="text" th:field="*{nome}" id="txtNome" class="form-control" placeholder="Ex.: João da Silva">
-                    </p>
+        <div class="container">
+            <div class="row justify-content-center align-items-center vh-100">
+                <div class="col-md-6">
+                    <form class="form" th:action="@{${(funcionario.id == null) ? '/cadastrar' : '/atualizarFuncionario'}}" th:object="${funcionario}" method="POST">
+                        <input th:if="${funcionario.id>0}" type="hidden" th:field="*{id}"/>
 
-                    <p>
-                        <label for="txtCpf">CPF</label>
-                        <input type="text" th:field="*{cpf}" id="txtCpf" class="form-control" placeholder="Ex.: 000.000.000-00">
-                    </p>
+                        <p>
+                            <label for="txtNome">Nome</label>
+                            <input type="text" th:field="*{nome}" id="txtNome" class="form-control" placeholder="Ex.: João da Silva">
+                            <span class="text-danger" id="erroNome"></span>
+                        </p>
 
-                    <p>
-                        <label for="txtTelefone">Telefone</label>
-                        <input type="text" th:field="*{telefone}" id="txtTelefone" class="form-control" placeholder="Ex.: (00) 9 0000-0000">
-                    </p>
+                        <p>
+                            <label for="txtCpf">CPF</label>
+                            <input type="text" th:field="*{cpf}" id="txtCpf" class="form-control" placeholder="Ex.: 000.000.000-00">
+                            <span class="text-danger" id="erroCpf"></span>
+                        </p>
 
-                    <p>
-                        <label for="txtEmail">E-mail</label>
-                        <input type="email" th:field="*{email}" id="txtEmail" class="form-control" placeholder="Ex.: joao@gmail.com">
-                    </p>
+                        <p>
+                            <label for="txtTelefone">Telefone</label>
+                            <input type="text" th:field="*{telefone}" id="txtTelefone" class="form-control" placeholder="Ex.: (00)90000-0000">
+                            <span class="text-danger" id="erroTelefone"></span>
+                        </p>
 
-                    <p>
-                        <label for="txtEndereco">Endereço</label>
-                        <input type="text" th:field="*{endereco}" id="txtEndereco" class="form-control" placeholder="Ex.: Rua Real, 13">
-                    </p>
+                        <p>
+                            <label for="txtEmail">E-mail</label>
+                            <input type="email" th:field="*{email}" id="txtEmail" class="form-control" placeholder="Ex.: joao@gmail.com">
+                            <span class="text-danger" id="erroEmail"></span>
+                        </p>
 
-                    <p>
-                        <label for="txtObs">Observações</label>
-                        <textarea th:field="*{observacoes}" id="txtObs" class="form-control"></textarea>
-                    </p>
+                        <p>
+                            <label for="txtEndereco">Endereço</label>
+                            <input type="text" th:field="*{endereco}" id="txtEndereco" class="form-control" placeholder="Ex.: Rua Real, 13">
+                            <span class="text-danger" id="erroEndereco"></span>
+                        </p>
 
-                    <button th:if="${funcionario.id==null}" type="submit" id="btnCadastrar">Cadastrar</button>
-                    <button th:if="${funcionario.id>0}" type="submit" id="btnCadastrar">Atualizar</button>
-                    <a th:href="@{${(funcionario.id == null) ? '/' : '/listagem'}}"><button type="button" id="btnVoltar">Cancelar</button></a>
-                </form>
+                        <p>
+                            <label for="txtObs">Observações</label>
+                            <textarea th:field="*{observacoes}" id="txtObs" class="form-control"></textarea>
+                        </p>
+
+                        <button th:if="${funcionario.id==null}" type="submit" id="btnCadastrar">Cadastrar</button>
+                        <button th:if="${funcionario.id>0}" type="submit" id="btnCadastrar">Atualizar</button>
+                        <a th:href="@{${(funcionario.id == null) ? '/' : '/listagem'}}"><button type="button" id="btnVoltar">Cancelar</button></a>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</body>
+
+        <script th:src="@{/js/jquery.js}"></script>
+        <script>
+            $(document).ready(function () {
+                $('#txtEmail').on('input', function () {
+                    validarEmail();
+                });
+
+                $('#txtNome').on('input', function () {
+                    validarNome();
+                });
+
+                $('#txtCpf').on('input', function () {
+                    validarCpf();
+                });
+
+                $('#txtTelefone').on('input', function () {
+                    validarTelefone();
+                });
+
+                $('#txtEndereco').on('input', function () {
+                    validarEndereco();
+                });
+
+                function validarEndereco() {
+                    let enderecoInput = $('#txtEndereco');
+                    let erroEnderecoSpan = $('#erroEndereco');
+
+                    if (enderecoInput.val().trim() === '') {
+                        erroEnderecoSpan.text('Endereço inválido');
+                        return false;
+                    } else {
+                        erroEnderecoSpan.text('');
+                        return true;
+                    }
+                }
+
+                function validarTelefone() {
+                    let telefoneInput = $('#txtTelefone');
+                    let erroTelefoneSpan = $('#erroTelefone');
+                    let telefoneRegex = /^\(\d{2}\)\d{5}-\d{4}$/;
+
+
+                    if (telefoneInput.val().trim() === '' || !telefoneRegex.test(telefoneInput.val())) {
+                        erroTelefoneSpan.text('Telefone inválido');
+                        return false;
+                    } else {
+                        erroTelefoneSpan.text('');
+                        return true;
+                    }
+                }
+
+                function validarCpf() {
+                    let cpfInput = $('#txtCpf');
+                    let erroCpfSpan = $('#erroCpf');
+                    let cpfRegex = /^\d{3}\.\d{3}\.\d{3}-\d{2}$/;
+
+
+                    if (cpfInput.val().trim() === '' || !cpfRegex.test(cpfInput.val())) {
+                        erroCpfSpan.text('CPF inválido');
+                        return false;
+                    } else {
+                        erroCpfSpan.text('');
+                        return true;
+                    }
+                }
+
+                function validarNome() {
+                    let nomeInput = $('#txtNome');
+                    let erroNomeSpan = $('#erroNome');
+
+                    if (nomeInput.val().trim() === '') {
+                        erroNomeSpan.text('Nome inválido');
+                        return false;
+                    } else {
+                        erroNomeSpan.text('');
+                        return true;
+                    }
+                }
+
+                function validarEmail() {
+                    let emailInput = $('#txtEmail');
+                    let erroEmailSpan = $('#erroEmail');
+
+                    if (emailInput.val().trim() === '' || !emailInput.val().includes('@')) {
+                        erroEmailSpan.text('E-mail inválido');
+                        return false;
+                    } else {
+                        erroEmailSpan.text('');
+                        return true;
+                    }
+                }
+
+                /*-------*/
+                $('form').on('submit', function (event) {
+                    if (!validarNome() || !validarCpf() || !validarTelefone() || !validarEmail() || !validarEndereco()) {
+                        event.preventDefault();
+                        alert("Por favor, preencha corretamente os campos!");
+                    }else{
+                        alert("Sucesso ao cadastrar!");
+                    }
+                });
+            });
+        </script>
+    </body>
 
 </html>
