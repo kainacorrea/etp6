@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
 
-<head>
+<head xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
     <title>Listagem de Funcionários</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="styleListarView.css">
+    <link rel="stylesheet" th:href="@{/css/styleListarView.css}">
 </head>
 
 <body>
@@ -15,7 +15,7 @@
         <h2>LISTAGEM DE FUNCIONÁRIOS</h2>
     </header>
 
-    <a href="index.html"><button type="button" id="btnVoltar">Voltar</button></a>
+    <a th:href="@{/}"><button type="button" id="btnVoltar">Voltar</button></a>
 
     <div class="tabela">
         <table class="table" id="tabela1">
@@ -30,20 +30,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>João da Silva</td>
-                    <td>000.000.000-00</td>
-                    <td>joao@gmail.com</td>
-                    <td>(00) 9 0000-0000</td>
+                <tr th:each="f : ${funcionarios}">
+                    <td th:text="${f.id}"></td>
+                    <td th:text="${f.nome}"></td>
+                    <td th:text="${f.cpf}"></td>
+                    <td th:text="${f.email}"></td>
+                    <td th:text="${f.telefone}"></td>
                     <td>
                         <div id="botoes">
-                            <a href="mostrarView.html"><button type="button" class="btn btn-primary" id="btnVer" title="Ver detalhes"><img
-                                        src="static/imagens/olho.png" alt="ver" /></button></a>
-                            <a><button type="button" class="btn btn-secondary" title="Editar"><img
-                                        src="static/imagens/lapis.png" alt="editar" /></button></a>
-                            <a><button type="button" class="btn btn-danger" title="Excluir"><img
-                                        src="static/imagens/lixo.png" alt="excluir" /></button></a>
+                            <a th:href="@{'/detalhes?id=' + ${f.id}}"><button type="button" class="btn btn-primary" id="btnVer" title="Ver detalhes"><img th:src="@{/imagens/olho.png}" alt="ver" /></button></a>
+                            <a th:href="@{'/alterar?id=' + ${f.id}}"><button type="button" class="btn btn-secondary" title="Editar"><img th:src="@{/imagens/lapis.png}" alt="editar" /></button></a>
+                            <a th:href="@{'/deletarFuncionario?id=' + ${f.id}}"><button type="button" class="btn btn-danger" title="Excluir"><img th:src="@{/imagens/lixo.png}" alt="excluir" /></button></a>
                         </div>
                     </td>
                 </tr>

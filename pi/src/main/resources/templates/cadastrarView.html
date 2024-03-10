@@ -12,13 +12,16 @@
 
 <body>
     <header>
-        <h2>Cadastrar Funcionário</h2>
+        <h2 th:if="${funcionario.id==null}">Cadastrar Funcionário</h2>
+        <h2 th:if="${funcionario.id>0}">Alterar Funcionário</h2>
     </header>
 
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100">
             <div class="col-md-6">
-                <form class="form" th:action="@{/cadastrar}" th:object="${funcionario}" method="POST">
+                <form class="form" th:action="@{${(funcionario.id == null) ? '/cadastrar' : '/atualizarFuncionario'}}" th:object="${funcionario}" method="POST">
+                    <input th:if="${funcionario.id>0}" type="hidden" th:field="*{id}"/>
+                    
                     <p>
                         <label for="txtNome">Nome</label>
                         <input type="text" th:field="*{nome}" id="txtNome" class="form-control" placeholder="Ex.: João da Silva">
@@ -49,8 +52,9 @@
                         <textarea th:field="*{observacoes}" id="txtObs" class="form-control"></textarea>
                     </p>
 
-                    <button type="submit" id="btnCadastrar">Cadastrar</button>
-                    <a th:href="@{/}"><button type="button" id="btnVoltar">Cancelar</button></a>
+                    <button th:if="${funcionario.id==null}" type="submit" id="btnCadastrar">Cadastrar</button>
+                    <button th:if="${funcionario.id>0}" type="submit" id="btnCadastrar">Atualizar</button>
+                    <a th:href="@{${(funcionario.id == null) ? '/' : '/listagem'}}"><button type="button" id="btnVoltar">Cancelar</button></a>
                 </form>
             </div>
         </div>

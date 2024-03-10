@@ -31,4 +31,70 @@ public class FuncionarioController {
         
         return "redirect:/";
     }
+    
+    @GetMapping("/listagem")
+    public String listagemFuncionarios(Model model){
+        model.addAttribute("funcionarios", funcionarios);
+        
+        return "listarView";
+    }
+    
+    @GetMapping("/detalhes")
+    public String mostrarDetalhes(@RequestParam String id, Model model){
+        FuncionarioEntity funcEncontrado = new FuncionarioEntity();
+        
+        for(FuncionarioEntity f : funcionarios){
+            if(f.getId() == Integer.parseInt(id)){
+                funcEncontrado = f;
+                break;
+            }
+        }
+        
+        model.addAttribute("funcionario", funcEncontrado);
+        return "mostrarView";
+    }
+    
+    @GetMapping("/alterar")
+    public String alterarFuncionario(Model model, @RequestParam String id){
+        Integer idFunc = Integer.parseInt(id);
+        FuncionarioEntity funcEncontrado = new FuncionarioEntity();
+        
+        for(FuncionarioEntity f : funcionarios){
+            if(f.getId() == idFunc){
+                funcEncontrado = f;
+                break;
+            }
+        }
+        
+        model.addAttribute("funcionario", funcEncontrado);
+        
+        return "cadastrarView";
+    }
+    
+    @PostMapping("/atualizarFuncionario")
+    public String salvarFilmeAtualizado(FuncionarioEntity fAtualizado){
+        for(FuncionarioEntity f : funcionarios){
+            if(f.getId() == fAtualizado.getId()){
+                f.setNome(fAtualizado.getNome());
+                f.setCpf(fAtualizado.getCpf());
+                f.setEmail(fAtualizado.getEmail());
+                f.setEndereco(fAtualizado.getEndereco());
+                f.setObservacoes(fAtualizado.getObservacoes());
+                f.setTelefone(fAtualizado.getTelefone());
+            }
+        }
+        return "redirect:/listagem";
+    }
+    
+    @GetMapping("/deletarFuncionario")
+    public String deletarFuncionario(@RequestParam String id){
+        for(FuncionarioEntity f : funcionarios){
+            if(f.getId() == Integer.parseInt(id)){
+                funcionarios.remove(f);
+                break;
+            }
+        }
+        
+        return "redirect:/listagem";
+    }
 }
