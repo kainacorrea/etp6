@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <title>Cadastro de Funcionário</title>
@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="styleCadastrarView.css">
+    <link rel="stylesheet" th:href="@{/css/styleCadastrarView.css}">
 </head>
 
 <body>
@@ -18,39 +18,39 @@
     <div class="container">
         <div class="row justify-content-center align-items-center vh-100">
             <div class="col-md-6">
-                <form class="form">
+                <form class="form" th:action="@{/cadastrar}" th:object="${funcionario}" method="POST">
                     <p>
                         <label for="txtNome">Nome</label>
-                        <input type="text" id="txtNome" class="form-control" placeholder="Ex.: João da Silva">
+                        <input type="text" th:field="*{nome}" id="txtNome" class="form-control" placeholder="Ex.: João da Silva">
                     </p>
 
                     <p>
                         <label for="txtCpf">CPF</label>
-                        <input type="text" id="txtCpf" class="form-control" placeholder="Ex.: 000.000.000-00">
+                        <input type="text" th:field="*{cpf}" id="txtCpf" class="form-control" placeholder="Ex.: 000.000.000-00">
                     </p>
 
                     <p>
                         <label for="txtTelefone">Telefone</label>
-                        <input type="text" id="txtTelefone" class="form-control" placeholder="Ex.: (00) 9 0000-0000">
+                        <input type="text" th:field="*{telefone}" id="txtTelefone" class="form-control" placeholder="Ex.: (00) 9 0000-0000">
                     </p>
 
                     <p>
                         <label for="txtEmail">E-mail</label>
-                        <input type="text" id="txtEmail" class="form-control" placeholder="Ex.: joao@gmail.com">
+                        <input type="email" th:field="*{email}" id="txtEmail" class="form-control" placeholder="Ex.: joao@gmail.com">
                     </p>
 
                     <p>
                         <label for="txtEndereco">Endereço</label>
-                        <input type="text" id="txtEndereco" class="form-control" placeholder="Ex.: Rua Real, 13">
+                        <input type="text" th:field="*{endereco}" id="txtEndereco" class="form-control" placeholder="Ex.: Rua Real, 13">
                     </p>
 
                     <p>
                         <label for="txtObs">Observações</label>
-                        <textarea id="txtObs" class="form-control"></textarea>
+                        <textarea th:field="*{observacoes}" id="txtObs" class="form-control"></textarea>
                     </p>
 
                     <button type="submit" id="btnCadastrar">Cadastrar</button>
-                    <a href="index.html"><button type="button" id="btnVoltar">Cancelar</button></a>
+                    <a th:href="@{/}"><button type="button" id="btnVoltar">Cancelar</button></a>
                 </form>
             </div>
         </div>

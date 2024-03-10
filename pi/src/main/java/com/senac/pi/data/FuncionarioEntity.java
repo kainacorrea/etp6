@@ -14,5 +14,5 @@ public class FuncionarioEntity {
     private String telefone;
     private String endereco;
     private String email;
-    private String observacores;
+    private String observacoes;
 }
