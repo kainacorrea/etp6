@@ -1,0 +1,43 @@
+* {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+
+}
+
+body {
+    /*background-color: #f5f5f5;*/
+    background-color: #1D1E33;
+    color: white;
+}
+
+header {
+    background-color: #2D0347;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#sec1 {
+    margin: 30px;
+}
+
+#btnVoltar{
+    background-color: transparent;
+    border-style:solid;
+    border-color: white;
+    color: white;
+    width: 80px;
+    padding: 5px;
+    margin-left: 30px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btnVoltar:hover {
+    border-color: lightgray;
+    color: lightgray;
+}
