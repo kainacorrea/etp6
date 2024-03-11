@@ -51,7 +51,47 @@ header {
     color: #58008f;
 }
 
-.tabela {
+.tabela, .pesquisa{
     margin: 30px;
+}
+
+.pesquisa {
+    max-width: 450px;
+}
+
+.pesquisa input{
+    width: 170px;
+}
+
+form{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#btnPesquisar, #btnVerTodos {
+    background-color: #2D0347;
+    color: white;
+    padding: 5px;
+    margin-left: 15px;
+    height: 35px;
+    border-radius: 30px;
+    border-style: hidden;
+    width: 110px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#btnVerTodos{
+    background-color: #7c7c7c;
+    width: 90px;
+}
+
+#btnVerTodos:hover {
+    background-color: #969696;
+}
+
+#btnPesquisar:hover {
+    background-color: #58008f;
 }
 

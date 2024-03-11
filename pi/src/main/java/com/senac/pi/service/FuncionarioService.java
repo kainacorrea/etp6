@@ -46,4 +46,8 @@ public class FuncionarioService {
         funcionarioRepository.deleteById(getFuncionarioPorId(id).getId());
         return true;
     }
+    
+    public List<FuncionarioEntity> pesquisarFuncionarioPorCpf(String cpf){
+        return funcionarioRepository.findByCpfContaining(cpf);
+    }
 }

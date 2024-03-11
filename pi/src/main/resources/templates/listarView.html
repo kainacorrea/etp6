@@ -17,6 +17,17 @@
 
     <a th:href="@{/}"><button type="button" id="btnVoltar">Voltar</button></a>
 
+    <div class="pesquisa">
+        <form th:action="@{/pesquisa}" class="form" method="POST">
+            <p>
+                CPF <input type="text" name="cpf" id="txtCpf" class="form-control" placeholder="Ex.: 000.000.000-00">
+                <span class="text-danger" id="erroCpf"></span>
+            </p>
+            <button type="submit" id="btnPesquisar">Pesquisar</button>
+            <a th:href="@{/listagem}"><button type="button" id="btnVerTodos">Ver Todos</button></a>
+        </form>
+    </div>
+    
     <div class="tabela">
         <table class="table" id="tabela1">
             <thead>

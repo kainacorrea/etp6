@@ -64,4 +64,11 @@ public class FuncionarioController {
         
         return "redirect:/listagem";
     }
+    
+    @PostMapping("/pesquisa")
+    public String pesquisarFuncionario(Model model, @RequestParam String cpf){
+        model.addAttribute("funcionarios", funcionarioService.pesquisarFuncionarioPorCpf(cpf));
+        
+        return "listarView";
+    }
 }
