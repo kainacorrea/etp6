@@ -2,7 +2,7 @@
 
 ## Status do Projeto
 
-Em Desenvolvimento...
+Concluído.
 
 ## Tecnologias Utilizadas
 
